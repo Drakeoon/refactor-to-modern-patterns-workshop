@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Children, Component } from 'react';
 import {
   Box,
   Heading,
@@ -8,7 +8,7 @@ import {
   Spinner,
   Button,
 } from '@chakra-ui/react';
-// import { UseRandomImage } from './useRandomImage';
+import { UseRandomImage } from './useRandomImage';
 
 class ClassComponentRenderProps extends Component {
   constructor(props) {
@@ -40,12 +40,21 @@ class ClassComponentRenderProps extends Component {
           Tip: Check out how we did this in the example in{' '}
           <Code>useDocumentTitle.jsx</Code>
         </Text>
-        {/* Use the return from your hook here for the image src! Also, add your reload button ;-) */}
+        <Box>
+          <UseRandomImage>
+            {({ imageUrl, refreshImage, loading }) => (
+              <>
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <Image boxSize='100px' src={imageUrl} />
+                )}
 
-        <Image />
-
-        <Box height='150px' width='150px' border='1px solid red' />
-        {/* Feel free to remove this box ^^ ;-) */}
+                <Button onClick={() => refreshImage()}>Reload</Button>
+              </>
+            )}
+          </UseRandomImage>
+        </Box>
       </Box>
     );
   }
