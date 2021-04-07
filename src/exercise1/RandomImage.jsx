@@ -32,6 +32,16 @@ const UseRandomImage = ({ children }) => {
   return children(randomImage);
 };
 
+const withUseRandomImage = Component => {
+  const WrappedComponent = props => {
+    const imageUrl = useRandomImage();
+
+    return <Component {...props} imageUrl={imageUrl} />;
+  };
+
+  return WrappedComponent;
+};
+
 class RandomImage extends React.Component {
   render() {
     return (
@@ -40,4 +50,14 @@ class RandomImage extends React.Component {
   }
 }
 
-export default RandomImage;
+class RandomImageWithHoc extends React.Component {
+  render() {
+    const { imageUrl } = this.props;
+
+    return <Image src={imageUrl} />;
+  }
+}
+
+export default withUseRandomImage(RandomImageWithHoc);
+
+// export default RandomImage;
