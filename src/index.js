@@ -7,11 +7,13 @@ import ThemeProvider from './exerciseContext/ThemeProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <CounterProvider>
-        <App />
-      </CounterProvider>
-    </ChakraProvider>
+    <ThemeProvider>
+      <ChakraProvider>
+        <CounterProvider>
+          <App />
+        </CounterProvider>
+      </ChakraProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

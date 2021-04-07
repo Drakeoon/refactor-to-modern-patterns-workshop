@@ -1,8 +1,8 @@
 import useRandomImage from './useRandomImage';
-import { Heading, Image, Text, Code, Button, Box } from '@chakra-ui/react';
+import { Heading, Image, Text, Code, Button, Spinner } from '@chakra-ui/react';
 
 const Exercise2FunctionalComponent = () => {
-  // use your hook here!
+  const { imageUrl, loading, refreshImage } = useRandomImage();
 
   return (
     <>
@@ -18,10 +18,10 @@ const Exercise2FunctionalComponent = () => {
         2. Update the useRandomImage hook so that it also returns a function we
         can call to refetch the image and pass that to the onClick of the Button
       </Text>
-      <Box height='150px' width='150px' border='1px solid red'>
-        {/* Use the src with <Image /> here and then add your <Button /> */}
-        {/* Feel free to  remove the box ;-) */}
-      </Box>
+
+      {loading ? <Spinner /> : <Image boxSize='100px' src={imageUrl} />}
+
+      <Button onClick={() => refreshImage()}>Reload</Button>
     </>
   );
 };

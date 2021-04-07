@@ -8,7 +8,7 @@ import {
   Spinner,
   Button,
 } from '@chakra-ui/react';
-// import { withuseRandomImage } from './useRandomImage';
+import { withuseRandomImage } from './useRandomImage';
 
 class ClassComponentHOC extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class ClassComponentHOC extends Component {
   // Class stuff that you can't refactor would be here 😬
 
   render() {
-    // We need access to the return values from our hook here as props
+    const { loading, imageUrl, refreshImage } = this.props;
 
     return (
       <Box m={2}>
@@ -38,15 +38,13 @@ class ClassComponentHOC extends Component {
           Tip: Check out how we did this in the example in{' '}
           <Code>useDocumentTitle.jsx</Code>
         </Text>
-        {/* Use the return from your hook here for the image src! Also, add your reload button ;-)  */}
 
-        <Image />
+        {loading ? <Spinner /> : <Image boxSize='100px' src={imageUrl} />}
 
-        <Box height='150px' width='150px' border='1px solid red' />
-        {/* Feel free to remove this box ^^ ;-) */}
+        <Button onClick={() => refreshImage()}>Reload</Button>
       </Box>
     );
   }
 }
 
-export default ClassComponentHOC;
+export default withuseRandomImage(ClassComponentHOC);
